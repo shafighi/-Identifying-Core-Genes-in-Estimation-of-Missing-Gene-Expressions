@@ -1,0 +1,40 @@
+A=[];
+B=[];
+M=[];
+temp=load('all_1_500_lasso_result.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,temp.meanErrs];
+temp=load('all_lasso_result_500_1000.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,temp.meanErrs];
+temp=load('all_1000_1500_lasso_result.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,temp.meanErrs];
+temp=load('all_1500_2000_lasso_result.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,meanErrs];
+temp=load('all_2000_2500_lasso_result.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,temp.meanErrs];
+temp=load('all_2500_3500_lasso_result.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,temp.meanErrs];
+temp=load('all_3500_end_lasso_result.mat');
+B = [B,temp.all_lasso_B];
+A = [A,temp.all_lasso_D];
+M = [M,temp.meanErrs];
+
+sorted = A(1,2:5703);
+for i=2:5702
+    sorted=[sorted;[A((i-1),1:(i-1)),A(i,(i+1):5703)]];
+end
+sorted = [sorted;A(5702,1:5702)];
+each_gene = sum(abs(sorted),2);
+
+[val ind] = sort(each_gene,'descend');
